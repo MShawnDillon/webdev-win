@@ -82,7 +82,8 @@ function Expand-Zip
 
             foreach ($item in $sourceFolder.Items())
             {
-                $percentComplete = ($currentItem / $itemCount) * 100
+                $realPercentComplete = ($currentItem / $itemCount) * 100
+                $percentComplete = [Int32]([Math]::Min($realPercentComplete + 1, 100))
 
                 Write-Progress `
                     -Activity 'Expanding compressed archive' `
