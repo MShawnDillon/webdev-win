@@ -1,3 +1,13 @@
+# Ignore the .idea/workspace.xml file per JetBrain's recommendation.
+# https://www.jetbrains.com/webstorm/webhelp/project.html
+#
+# Note:
+#
+# All the settings files in the .idea directory should be put under version control except the workspace.xml,
+# which stores your local preferences. The workspace.xml file should be marked as ignored by VCS.
+#
+.idea/workspace.xml
+
 # Logs
 logs
 *.log
