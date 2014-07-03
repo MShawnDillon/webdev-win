@@ -49,7 +49,7 @@ Assumptions
 > tasks at a **command prompt**. If you are the type of person who asks "what
 > program do I use to open this?" at the first encounter of an unfamiliar file
 > type before seeing for yourself what type of data that file contains, then
-> perhaps "Blood Donor" would be a more suitable career choice. 
+> perhaps **Blood Donor** would be a more suitable career choice. 
 
 **&lt;/rant&gt;**
 
