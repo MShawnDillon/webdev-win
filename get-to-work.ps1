@@ -17,6 +17,7 @@ param (
 .'.\Get-NodeVersion.ps1'
 .'.\Get-NpmVersion.ps1'
 .'.\Get-PortableGit.ps1'
+.'.\Get-GitProperty.ps1'
 .'.\Set-GitProperty.ps1'
 .'.\Set-NpmProperty.ps1'
 .'.\Test-Nvmw.ps1'
@@ -32,7 +33,27 @@ if (($DisplayName.Length -gt 0) -and ($EmailAddress.Length -gt 0))
 }
 else
 {
-    $userInfo = Get-UserInfo
+    if ((Get-GitVersion) -ne $null)
+    {
+        $DisplayName = Get-GitProperty 'user.name'
+        $EmailAddress = Get-GitProperty 'user.email'
+
+        $userInfo = Get-UserInfo -NonInteractive
+
+        if ($userInfo.DisplayName.Length -eq 0)
+        {
+            $userInfo.DisplayName = $DisplayName
+        }
+
+        if ($userInfo.EmailAddress.Length -eq 0)
+        {
+            $userInfo.EmailAddress = $EmailAddress
+        }
+    }
+    else
+    {
+        $userInfo = Get-UserInfo
+    }
 }
 
 if ((Get-GitVersion) -lt ([Version]'1.9.2'))

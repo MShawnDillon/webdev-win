@@ -27,7 +27,7 @@ function Set-GitProperty
 
     process
     {
-        $currentValue = git config `-`-global `-`-get`-all $Name
+        $currentValue = Get-GitProperty $Name
 
         if ($currentValue -ne $Value)
         {
