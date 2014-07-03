@@ -73,6 +73,10 @@ function Get-UserInfo
             {
                 $displayName = $entry.Properties["FullName"][0]
             }
+            catch [Runtime.InteropServices.COMException]
+            {
+                ## Do nothing, leave it empty.
+            }
             finally
             {
                 $entry.Dispose()
