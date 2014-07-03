@@ -32,7 +32,7 @@ function Set-NpmProperty
         [String] $Name,
         [Parameter(Mandatory = $true)]
         [String] $Value,
-        [Switch] $Global
+        [Switch] $Global,
         [Switch] $Force
     )
 
