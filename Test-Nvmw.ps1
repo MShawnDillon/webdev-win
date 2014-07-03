@@ -2,7 +2,8 @@ function Test-Nvmw
 {
     try
     {
-        $command = Get-Command nvmw.bat -ErrorAction SilentlyContinue
+        ## Calling it without arguments produces help text.
+        $quickTest = nvmw.bat
 
         return $true
     }
