@@ -16,7 +16,7 @@
 .PARAMETER StandardUI
     Use Windows' native UI for progress information and error dialogs.
 .PARAMETER Force
-    Answer "Yes to All" for any prompts that might have been displayed.
+    Answer "Yes to All" for any prompts that might be displayed.
 .NOTES
     Original Author: M. Shawn Dillon
 #Requires -Version 2.0
@@ -36,8 +36,9 @@ function Expand-Zip
 
     begin
     {
-        # Make sure we're using a full path rather than a relative path.
+        # Make sure we're using full paths rather than relative paths.
         $Path = [IO.Path]::GetFullPath($ZipPath)
+        $Destination = [IO.Path]::GetFullPath($Destination)
 
         # Create the destination if it does not exist.
         if ((Test-Path $Destination -PathType Container) -eq $false)
@@ -73,32 +74,57 @@ function Expand-Zip
         }
         else
         {
-            $itemCount = $sourceFolder.Items().Count
-            $currentItem = 1
+            $fileMap = New-Object 'System.Collections.Generic.Dictionary[System.Object,System.Object]'
+            $stack = New-Object 'System.Collections.Generic.Stack[Object]'
+            $nsMap = New-Object 'System.Collections.Generic.KeyValuePair[System.Object,System.Object]' @($sourceFolder,$destinationFolder)
+
+            $stack.Push($nsMap)
 
             Write-Progress `
                 -Activity 'Expanding compressed archive' `
                 -Status $Path
 
-            foreach ($item in $sourceFolder.Items())
+            while ($stack.Count -gt 0)
             {
-                $realPercentComplete = ($currentItem / $itemCount) * 100
-                $percentComplete = [Int32]([Math]::Min($realPercentComplete + 1, 100))
+                $nsMap = $stack.Pop()
 
-                Write-Progress `
-                    -Activity 'Expanding compressed archive' `
-                    -Status $Path `
-                    -PercentComplete $percentComplete
+                $sourceNamespace = $nsMap.Key
+                $destNamespace = $nsMap.Value
 
-                $destinationFolder.CopyHere($item, $FolderOptions)
+                foreach ($item in $sourceNamespace.Items())
+                {
+                    $destPath = $item.Path.Replace($Path, $Destination)
 
-                $currentItem = $currentItem + 1
+                    if ($item.IsFolder -eq $true)
+                    {
+                        if ((Test-Path $destPath -PathType Container) -eq $false)
+                        {
+                            New-Item $destPath -ItemType Directory | Out-Null
+                        }
+
+                        $sourceDirNamespace = $shellApplication.NameSpace($item)
+                        $destDirNamespace = $shellApplication.NameSpace($destPath)
+
+                        $nsMap = New-Object 'System.Collections.Generic.KeyValuePair[System.Object,System.Object]' @($sourceDirNamespace,$destDirNamespace)
+
+                        $stack.Push($nsMap)
+                    }
+                    else
+                    {
+                        $destNamespace.CopyHere($item, $FolderOptions)
+                    }
+
+                    Write-Progress `
+                        -Activity 'Expanding compressed archive' `
+                        -Status $Path `
+                        -CurrentOperation ($item.Path.Replace($Path, [String]::Empty).Substring(1))
+                }
             }
 
             Write-Progress `
                 -Activity 'Expanding compressed archive' `
                 -Status $Path `
-                -Complete
+                -Completed
         }
     }
 
@@ -107,5 +133,7 @@ function Expand-Zip
         $destinationFolder = $null
         $sourceFolder = $null
         $shellApplication = $null
+        
+        [GC]::Collect()
     }
 }
