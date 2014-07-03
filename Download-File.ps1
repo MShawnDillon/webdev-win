@@ -24,74 +24,84 @@ function Download-File
         [String] $Url,
         [Parameter(Mandatory = $false)]
         [String] $LocalFile = `
-            (Join-Path $PWD.Path $Url.SubString($Url.LastIndexOf('/') + 1)),
-        [Parameter(Mandatory = $false)]
-        [Int32] $Id = 0
+            (Join-Path $PWD.Path $Url.SubString($Url.LastIndexOf('/') + 1))
     )
 
-    begin
+    process
     {
     	$client = New-Object System.Net.WebClient
 
+        $global:DownloadError = $null
         $global:DownloadComplete = $false
 
         $eventDataComplete = Register-ObjectEvent `
             -InputObject $client `
             -EventName DownloadFileCompleted `
             -SourceIdentifier WebClient.DownloadFileComplete `
-            -Action { $global:DownloadComplete = $true }
+            -Action { `
+                $global:DownloadComplete = $true; `
+                $global:DownloadError = $EventArgs.Error; `
+            }
 
         $eventDataProgress = Register-ObjectEvent `
             -InputObject $client `
             -EventName DownloadProgressChanged `
             -SourceIdentifier WebClient.DownloadProgressChanged `
             -Action { $global:DownloadProgress = $EventArgs }
-    }
 
-    process
-    {
         Write-Progress `
             -Activity 'Downloading file' `
             -Status $Url
 
-        $client.DownloadFileAsync($Url, $LocalFile)
-
-        while ($global:DownloadComplete -eq $false)
+        try
         {
-            $percentComplete = $global:DownloadProgress.ProgressPercentage
+            $client.DownloadFileAsync($Url, $LocalFile)
 
-            if ($percentComplete -ne $null)
+            while ($global:DownloadComplete -eq $false)
             {
-                Write-Progress `
-                    -Activity 'Downloading file' `
-                    -Status $Url `
-                    -PercentComplete $percentComplete
+                $percentComplete = $global:DownloadProgress.ProgressPercentage
+
+                if ($percentComplete -ne $null)
+                {
+                    Write-Progress `
+                        -Activity 'Downloading file' `
+                        -Status $Url `
+                        -PercentComplete $percentComplete
+                }
+            }
+
+            Write-Progress `
+                -Activity 'Downloading file' `
+                -Status $Url `
+                -Completed
+
+            if ($global:DownloadError -ne $null)
+            {
+                Remove-Item $LocalFile | Out-Null
+
+                Throw $global:DownloadError
             }
         }
+        finally
+        {
+            Unregister-Event `
+                -SourceIdentifier WebClient.DownloadProgressChanged
 
-        Write-Progress `
-            -Activity 'Downloading file' `
-            -Status $Url `
-            -Complete
-    }
+            Unregister-Event `
+                -SourceIdentifier WebClient.DownloadFileComplete
 
-    end
-    {
-        Unregister-Event `
-            -SourceIdentifier WebClient.DownloadProgressChanged
+            $client.Dispose()
 
-        Unregister-Event `
-            -SourceIdentifier WebClient.DownloadFileComplete
+            $global:DownloadComplete = $null
+            $global:DownloadProgress = $null
+            $global:DownloadError = $null
 
-        $client.Dispose()
-
-        $global:DownloadComplete = $null
-        $global:DownloadProgress = $null
-
-        Remove-Variable client
-        Remove-Variable eventDataComplete
-        Remove-Variable eventDataProgress
-
-        [GC]::Collect()
+            Remove-Variable client
+            Remove-Variable eventDataComplete
+            Remove-Variable eventDataProgress
+            Remove-Variable DownloadComplete -Scope Global
+            Remove-Variable DownloadProgress -Scope Global
+            Remove-Variable DownloadError -Scope Global
+        }
     }
 }
