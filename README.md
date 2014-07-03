@@ -42,13 +42,26 @@ Assumptions
 > finding out what it is capable of, discovering how the tools and
 > technologies you use actually function, simply by *issuing commands*.
 >
+> It is hard to do this when the programs that most users are familiar with
+> are specifically designed to *limit what you can accomplish* to the features
+> offered and supported by the program in question. Maybe that program doesn't
+> have the capability I need, or maybe it does, but doesn't execute it the way
+> I want it to or provide the hooks necessary for me to customize what it does
+> and how it does it. Working around the idiosyncrasies of a program is often
+> a full-time job in itself.
+>
+> Fortunately, there is a program that is *purpose-built* to sit there and
+> wait for you to command it; to tell it exactly what you want it to do; and
+> whose only limitation is what the machine and, by extension, the set of
+> machines and people and things that you can access from it, is capable of.
+>
 > You need to know how to open, read and edit text files in a text editor (any
 > of the myriad of options available will do, including Notepad if you have
 > nothing better available). You will also need to know how to navigate a
 > directory (tree) structure, issue commands from and otherwise perform basic
 > tasks at a **command prompt**. If you are the type of person who asks "what
-> program do I use to open this?" at the first encounter of an unfamiliar file
-> type before seeing for yourself what type of data that file contains, then
+> program do I use to open this?" when you first encounter an unfamiliar file
+> type, before seeing for yourself what type of data that file contains, then
 > perhaps **Blood Donor** would be a more suitable career choice. 
 
 **&lt;/rant&gt;**
@@ -87,7 +100,7 @@ changes to your machine.
 
 In any case, I wanted to create a script that would basically 'start from
 scratch', assuming only a locked-down out-of-the-box installation of Windows
-7 with network access (net-nannies and blocked sites notwithstanding) running
+7 with network access ('net nannies and blocked sites notwithstanding) running
 in an almost-draconian corporate environment, and from that point get a
 complete Git + Node + NPM + MongoDB development environment running, and
 running well, able to easily support rapid development and accelerate even the
@@ -100,3 +113,4 @@ no special privileges whatsoever.
 [NodeJS]: http://nodejs.org/ "NodeJS"
 [NPM]: https://www.npmjs.org/ "Node Packaged Modules"
 [NuGet]: https://www.nuget.org/ "NuGet Gallery"
+[NPMConfig]: https://www.npmjs.org/doc/misc/npm-config.html "NPM Configuration Settings"
