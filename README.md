@@ -30,23 +30,23 @@ Assumptions
 
 > ### Mice Cannot Write Code
 >
-> Creating new and interesting *functionality* -- in effect, **solving
-> problems** with software -- is all about issuing commands for the machine to
-> carry out on your behalf. At times, those commands may be stored in an
-> intermediate format, waiting to be transformed into machine code so that the
-> machine can interpret your instructions more rapidly; at other times this
-> involves configuring or selecting a set of options for another program
-> written by someone else that already has the functionality you need just
-> waiting to be tapped. More often though, this involves simply *telling the
-> computer what to do* and asking what it is capable of, discovering how the
-> tools and technologies you use actually function, simply by issuing
-> commands.
+> Creating new and interesting functionality &emdash; in effect, **solving
+> problems** with software &emdash; is all about issuing commands for the
+> machine to carry out on your behalf. At times, those commands may be stored
+> in an intermediate format waiting to be transformed into machine code so
+> that the machine can interpret your instructions more rapidly; at other
+> times this involves configuring or selecting a set of options for another
+> program written by someone else that already has the functionality you need
+> just waiting to be tapped and put into service for your own use. Far more
+> often though, this involves simply *telling the computer what to do* and
+> finding out what it is capable of, discovering how the tools and
+> technologies you use actually function, simply by *issuing commands*.
 >
 > You need to know how to open, read and edit text files in a text editor (any
 > of the myriad of options available will do, including Notepad if you have
 > nothing better available). You will also need to know how to navigate a
 > directory (tree) structure, issue commands from and otherwise perform basic
-> tasks at a [command prompt]. If you are the type of person who asks "what
+> tasks at a **command prompt**. If you are the type of person who asks "what
 > program do I use to open this?" at the first encounter of an unfamiliar file
 > type before seeing for yourself what type of data that file contains, then
 > perhaps "Blood Donor" would be a more suitable career choice. 
