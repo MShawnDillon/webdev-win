@@ -18,8 +18,6 @@ function Get-NpmVersion
 {
     try
     {
-        $command = Get-Command npm.cmd -ErrorAction SilentlyContinue
-
         $npmVersion = npm.cmd `-`-version
 
         $match = [Regex]::Match( `

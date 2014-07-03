@@ -18,8 +18,6 @@ function Get-NodeVersion
 {
     try
     {
-        $command = Get-Command node.exe -ErrorAction SilentlyContinue
-
         $nodeVersion = node.exe `-`-version
 
         $match = [Regex]::Match( `

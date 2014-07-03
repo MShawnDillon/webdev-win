@@ -17,8 +17,6 @@ function Get-GitVersion
 {
     try
     {
-        $command = Get-Command git.exe -ErrorAction SilentlyContinue
-
         $gitVersion = git.exe `-`-version
 
         $match = [Regex]::Match( `
