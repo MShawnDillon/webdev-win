@@ -59,8 +59,9 @@ Inspired By
 I was looking for a way to get
 [Git](http://en.wikipedia.org/wiki/Git_%28software%29) on my workstation
 without violating my company's software installation policies, and without
-having to wait the months -- nay, years, based on previous experience --
-that it usually takes to get software certified through official channels.
+having to wait the months &#8211; nay, years, based on previous experience
+&#8211; that it usually takes to get software certified through official
+channels.
 
 I ran across [this][NonAdmin_Git], and had also been using the excellent
 [nvm][NVM] on personal development machines to manage and use multiple
