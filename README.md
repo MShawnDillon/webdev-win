@@ -45,10 +45,10 @@ Assumptions
 > It is hard to do this when the programs that most users are familiar with
 > are specifically designed to *limit what you can accomplish* to the features
 > offered and supported by the program in question. Maybe that program doesn't
-> have the capability I need, or maybe it does, but doesn't execute it the way
-> I want it to or provide the hooks necessary for me to customize what it does
-> and how it does it. Working around the idiosyncrasies of a program is often
-> a full-time job in itself.
+> have the capability you need, or maybe it does, but doesn't execute it the
+> way you want it to or provide the hooks necessary for you to customize what
+> it does and how it does it. Working around the idiosyncrasies of a program
+> is often a full-time job in itself.
 >
 > Fortunately, there is a program that is *purpose-built* to sit there and
 > wait for you to command it; to tell it exactly what you want it to do; and
