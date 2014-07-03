@@ -30,8 +30,8 @@ Assumptions
 
 > ### Mice Cannot Write Code
 >
-> Creating new and interesting functionality &emdash; in effect, **solving
-> problems** with software &emdash; is all about issuing commands for the
+> Creating new and interesting functionality &endash; in effect, **solving
+> problems** with software &endash; is all about issuing commands for the
 > machine to carry out on your behalf. At times, those commands may be stored
 > in an intermediate format waiting to be transformed into machine code so
 > that the machine can interpret your instructions more rapidly; at other
