@@ -26,10 +26,10 @@ Assumptions
 
 5.  **You need to get some work done.**
 
-&lt;rant&gt;
+**&lt;rant&gt;**
 
-> ### You Cannot Write Code with a Mouse
-
+> ### Mice Cannot Write Code
+>
 > Creating new and interesting *functionality* -- in effect, **solving
 > problems** with software -- is all about issuing commands for the machine to
 > carry out on your behalf. At times, those commands may be stored in an
@@ -51,7 +51,7 @@ Assumptions
 > type before seeing for yourself what type of data that file contains, then
 > perhaps "Blood Donor" would be a more suitable career choice. 
 
-&lt;/rant&gt;
+**&lt;/rant&gt;**
 
 Inspired By
 -----------
