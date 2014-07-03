@@ -39,7 +39,7 @@ if ((Get-GitVersion) -lt ([Version]'1.9.2'))
 {
     $gitInstallRoot = Join-Path $userInfo.DataDirectory 'Git'
 
-    Get-Git `
+    Get-PortableGit `
         -Url 'https://github.com/msysgit/msysgit/releases/download/Git-1.9.4-preview20140611/PortableGit-1.9.4-preview20140611.7z' `
         -GitInstallRoot $gitInstallRoot
 }

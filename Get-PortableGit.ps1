@@ -14,7 +14,7 @@
     Original Author: M. Shawn Dillon
 #Requires -Version 2.0
 #>
-function Get-Git
+function Get-PortableGit
 {
     param (
         [Parameter(Mandatory = $true)]
@@ -69,41 +69,32 @@ function Get-Git
         ## Git internally uses the following environment variables, so let's
         ## go ahead and set them both in the user's environment as well as the
         ## current process environment (if they're not already present).
-        if ((Test-Path Env:\HOME) -eq $false)
-        {
-            ## The HOME environment variable is not necessarily the same as
-            ## the user's USERPROFILE. The user profile is a local directory
-            ## where Windows stores the user's application data (like this
-            ## per-user installation of Git), roaming configuration settings,
-            ## and the user's personal registry hive. The HOME location, on
-            ## the other hand, could be a network location where the user is
-            ## intended to save their personal documents and files. The major
-            ## difference between these two is that, if the workstation should
-            ## become toast (or a brick), the roaming settings are safely
-            ## backed up in Active Directory, and the user's documents and
-            ## other files are safe in the HOME location (usually on a network
-            ## share). Anything else in the user profile is subject to be lost
-            ## forever.
-            ##
-            ## Windows automatically defines a HOMEDRIVE and a HOMEPATH, but
-            ## doesn't combine them into a HOME location (which is standard
-            ## on Mac/Unix and Linux systems that don't have the concept of
-            ## "drives" as part of the file system).
-            ##
-            ## This makes sure that the HOME variable is set, and points to
-            ## the correct location.
-            Set-UserEnv HOME ($env:HOMEDRIVE + $env:HOMEPATH)
-        }
 
-        if ((Test-Path Env:\PLINK_PROTOCOL) -eq $false)
-        {
-            Set-UserEnv PLINK_PROTOCOL 'ssh'
-        }
+        ## The HOME environment variable is not necessarily the same as
+        ## the user's USERPROFILE. The user profile is a local directory
+        ## where Windows stores the user's application data (like this
+        ## per-user installation of Git), roaming configuration settings,
+        ## and the user's personal registry hive. The HOME location, on
+        ## the other hand, could be a network location where the user is
+        ## intended to save their personal documents and files. The major
+        ## difference between these two is that, if the workstation should
+        ## become toast (or a brick), the roaming settings are safely
+        ## backed up in Active Directory, and the user's documents and
+        ## other files are safe in the HOME location (usually on a network
+        ## share). Anything else in the user profile is subject to be lost
+        ## forever.
+        ##
+        ## Windows automatically defines a HOMEDRIVE and a HOMEPATH, but
+        ## doesn't combine them into a HOME location (which is standard
+        ## on Mac/Unix and Linux systems that don't have the concept of
+        ## "drives" as part of the file system).
+        ##
+        ## This makes sure that the HOME variable is set, and points to
+        ## the correct location.
+        Set-UserEnv HOME ($env:HOMEDRIVE + $env:HOMEPATH)
 
-        if ((Test-Path Env:\TERM) -eq $false)
-        {
-            Set-UserEnv TERM 'msys'
-        }
+        Set-UserEnv PLINK_PROTOCOL 'ssh'
+        Set-UserEnv TERM 'msys'
 
         # Back up current curl-ca-bundle.crt
         $currentCurlCaBundle = Join-Path $gitInstallBinAlternate `
