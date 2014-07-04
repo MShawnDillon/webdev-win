@@ -113,8 +113,8 @@ changes, not when you make them. (In other words, any changes that you don't
 share ultimately don't exist except in your own little world.)
 
 The 'push.default' setting is set to 'simple' to match a new default setting
-that has yet to be introduced, and prevents spurious [warning
-messages][GitPushDefaultWarning] that advertises this upcoming change.
+that has yet to be introduced, and prevents a confusing/alarming [warning
+message][GitPushDefaultWarning] that advertises this upcoming change.
 
 The 'alias.serve' and 'alias.hub' settings are new (to me, at least). Git
 never ceases to surprise and amaze me. Like the original poster of [this
