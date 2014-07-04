@@ -118,7 +118,7 @@ you to quickly (and temporarily) host any repository on your own box and share
 it directly with other people on your network. Within the root of any given
 repository, typing `git serve` will host that repository for other users to
 pull from (the pulling user would use something like
-`git clone git://*machinename*/` to clone the repository directly from your
+`git clone git://machinename/` to clone the repository directly from your
 `machinename`). Similarly, `git hub` (note the space...this is the command,
 not the company of the same name) allows other users to not only read your
 repository, but also to push their own changes to you. This is distributed
