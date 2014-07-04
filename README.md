@@ -103,8 +103,8 @@ up to a server that makes this a non-issue. Every pack of changes knows where
 it came from and who posted the whole pack (comprising multiple commits), and
 who posted the pack has little to do with the name associated with individual
 commits. In short (too late), security is implemented when you share your
-changes, not when you make them. (In other words, any changes you don't share
-ultimately don't exist except in your own little world.)
+changes, not when you make them. (In other words, any changes that you don't
+share ultimately don't exist except in your own little world.)
 
 The 'push.default' setting is set to 'simple' to match a new default setting
 that has yet to be introduced, and prevents spurious [warning
