@@ -52,7 +52,7 @@ Type: `get-to-work`
 
 ### What Happens When I Type `get-to-work`?
 
-Well, read the source, if you're really curious. :) Here is the TL;DR version,
+Well, read the source, if you're really curious. :-) Here is the TL;DR version,
 which is still pretty long.
 
 The batch file launches the `get-to-work.ps1` PowerShell script.
@@ -85,10 +85,11 @@ your own user account.
 
 When the script is sure that Git is available, it then sets the 'user.name',
 'user.email', 'push.default', 'alias.serve', and 'alias.hub' Git global
-configuration settings. (Global configuration, in Git terms, means outside of
-any particular repository. These settings apply to all of the repositories
-that you use or create by default, but they can also be overridden within any
-given repository.)
+configuration settings. These settings are stored in the .gitconfig file in
+your user profile (e.g., `C:\Users\Some User\.gitconfig`). Global
+configuration, in Git terms, means outside of any particular repository. These
+settings apply to all of the repositories that you use or create by default,
+but they can also be overridden within any given repository.
 
 The purpose of the 'user.name' and 'user.email' settings should be pretty
 obvious. When you commit changes, this is "who" those changes in the
