@@ -26,6 +26,105 @@ Assumptions
 
 5.  **You need to get some work done.**
 
+Usage
+-----
+
+This is currently in an "alpha" state, but basic usage is as follows:
+
+Use the [Download
+Zip](https://github.com/MShawnDillon/webdev-win/archive/master.zip) button on
+GitHub (should be on the right if you're reading this on [GitHub]) to download
+the current contents of this entire repository (but not the repo itself) as a
+compressed archive.
+
+Since Windows marks files you download from the Internet as "blocked"
+(untrusted) by default (an annoyance that provides no security benefit
+whatsoever), you'll need to first right-click on the ZIP file to open the
+context menu, then choose "Properties", and on the dialog that pops up, click
+on the "Unblock" button.
+
+With that out of the way, extract the contents somewhere (anywhere, really).
+
+Open a Command Prompt and navigate to the directory where you placed these
+files.
+
+Type: `get-to-work`
+
+### What Happens When I Type `get-to-work`?
+
+Well, read the source, if you're really curious. :) Here is the TL;DR version,
+which is still pretty long.
+
+The batch file launches the `get-to-work.ps1` PowerShell script.
+
+The PowerShell script then pulls in all of the other scripts it needs to work.
+
+It then sets about trying to automatically determine who you are (reading from
+environment variables, mostly), but specifically it needs to know your display
+name (at least, the display name as it is stored either in Active Directory or
+on your machine), as well as your e-mail address. If it cannot determine this
+information automatically, it may ask you for it.
+
+These two pieces of information (display name and e-mail address) are needed
+to correctly configure Git and other tools.
+
+Next, it finds out whether you have Git already, and if not, it gets a
+portable version that can be used without installation (for example, you could
+put Portable Git on a USB stick and carry it around with you; at least, that
+is the idea under which it was developed). What you **won't** get with the
+portable version of Git is the Windows Shell Extension (`git-cheetah`) that
+provides the 'Git GUI Here' and 'Git Bash Here' commands, since that feature
+requires changes to system-wide registry keys.
+
+Git is ultimately a command-line tool in any case, so a couple of missing
+context menu items are not likely to cause a lot of pain and suffering.
+
+By default, the `get-to-work.ps1` script puts Git into your `%APPDATA%`
+directory, so as to keep it out of your way, but still make it available to
+your own user account.
+
+When the script is sure that Git is available, it then sets the 'user.name',
+'user.email', 'push.default', 'alias.serve', and 'alias.hub' Git global
+configuration settings. (Global configuration, in Git terms, means outside of
+any particular repository. These settings apply to all of the repositories
+that you use or create by default, but they can also be overridden within any
+given repository.)
+
+The purpose of the 'user.name' and 'user.email' settings should be pretty
+obvious. When you commit changes, this is "who" those changes in the
+repository will be associated with by default. Notice that you can impersonate
+someone else if you really wanted to, simply by providing a false name and
+email address for these settings. If you're wondering whether or not this
+constitutes a security issue, the short answer is "no". Any name and e-mail
+address can be tacked onto a set of changes on your own copy of the repo.
+It is the process of authenticating yourself when you go pushing those changes
+up to a server that makes this a non-issue. Every pack of changes knows where
+it came from and who posted the whole pack (comprising multiple commits), and
+who posted the pack has little to do with the name associated with individual
+commits. In short (too late), security is implemented when you share your
+changes, not when you make them. (In other words, changes you don't share
+ultimately don't exist except in your own little world.)
+
+The 'push.default' setting is set to 'simple' to match a new default setting
+that has yet to be introduced, and prevents spurious [warning
+messages][GitPushDefaultWarning] that advertise this upcoming change.
+
+The 'alias.serve' and 'alias.hub' settings are new (to me, at least). Git
+never ceases to surprise and amaze me. Like the original poster of [this
+question][GitServe], I missed Mercurial's simple built-in web server for quick
+collaboration directly between peers in a LAN environment. These aliases allow
+you to quickly (and temporarily) host any repository on your own box and share
+it directly with other people on your network. Within the root of any given
+repository, typing `git serve` will host that repository for other user's to
+pull from (the pulling user would use something like
+`git clone git://*machinename*/` to clone the repository directly from your
+`machinename`). Similarly, `git hub` (note the space...this is the command,
+not the company of the same name) allows other users to not only read your
+repository, but also to push their own changes to you. This is distributed
+version control at its finest; notice that no centralized server needs to be
+involved (though you will likely want to use one when you share changes with
+your company-at-large).
+
 **&lt;rant&gt;**
 
 > ### Mice Cannot Write Code
@@ -53,7 +152,8 @@ Assumptions
 > Fortunately, there is a program that is *purpose-built* to sit there and
 > wait for you to command it; to tell it exactly what you want it to do; and
 > whose only limitation is what the machine and, by extension, the set of
-> machines and people and things that you can access from it, is capable of.
+> machines and programs and people and things that you can access from it, is
+> capable of.
 >
 > You need to know how to open, read and edit text files in a text editor (any
 > of the myriad of options available will do, including Notepad if you have
@@ -114,3 +214,6 @@ no special privileges whatsoever.
 [NPM]: https://www.npmjs.org/ "Node Packaged Modules"
 [NuGet]: https://www.nuget.org/ "NuGet Gallery"
 [NPMConfig]: https://www.npmjs.org/doc/misc/npm-config.html "NPM Configuration Settings"
+[GitHub]: https://github.com/ "GitHub"
+[GitPushDefaultWarning]: http://stackoverflow.com/questions/13148066/warning-push-default-is-unset-its-implicit-value-is-changing-in-git-2-0
+[GitServe]: http://stackoverflow.com/questions/377213/git-serve-i-would-like-it-that-simple
