@@ -108,7 +108,7 @@ share ultimately don't exist except in your own little world.)
 
 The 'push.default' setting is set to 'simple' to match a new default setting
 that has yet to be introduced, and prevents spurious [warning
-messages][GitPushDefaultWarning] that advertise this upcoming change.
+messages][GitPushDefaultWarning] that advertises this upcoming change.
 
 The 'alias.serve' and 'alias.hub' settings are new (to me, at least). Git
 never ceases to surprise and amaze me. Like the original poster of [this
@@ -171,10 +171,10 @@ Inspired By
 -----------
 
 I was looking for a way to get
-[Git](http://en.wikipedia.org/wiki/Git_%28software%29) on my workstation
-without violating my company's software installation policies, and without
+[Git](http://en.wikipedia.org/wiki/Git_%28software%29) on a workstation
+without violating the company's software installation policies, and without
 having to wait the months &#8211; nay, years, based on previous experience
-&#8211; that it usually takes to get software certified through official
+&#8211; that it sometimes takes to get software certified through official
 channels.
 
 I ran across [this][NonAdmin_Git], and had also been using the excellent
