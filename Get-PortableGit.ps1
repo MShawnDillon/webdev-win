@@ -188,5 +188,7 @@ gQmyaOJ89bZWRdtY1GjF3XCPD0ZlZ8wtCJH7pmDkX3WxRSI+6443
         {
             Throw 'Unable to get Git.'
         }
+
+        Set-GitProperty 'http.sslCAInfo' "`"$currentCurlCaBundle`""
     }
 }

@@ -112,10 +112,18 @@ if (((Get-NodeVersion) -eq $null) -or ((Get-NpmVersion) -eq $null))
 ## and the target server's certificate (the one that may have been
 ## issued by a trusted authority) is never actually received.
 ##
-## To work around this and tell NPM that it should not enforce SSL
-## certificate validation, the 'strict-ssl' configuration setting must
-## be set to 'false'.
-Set-NpmProperty 'strict-ssl' 'false' -Global -Force
+## To work around this, we tell NPM that it should use the same list of
+## certificate authorities that Git uses. (Previously, this set the
+## 'strict-ssl' value to 'false', but this halts all certificate validation
+## checks and creates serious security vulnerabilities. When NPM 'knows' that
+## it should trust the corporate proxy's certificate issuer, we can turn
+## 'strict-ssl' validation back on and have NPM look up certificate chains
+## using internal CA's.)
+
+$gitCaSetting = Get-GitProperty 'http.sslCAInfo'
+
+Set-NpmProperty 'strict-ssl' 'true' -Global -Force
+Set-NpmProperty 'cafile' $gitCaSetting -Global -Force
 Set-NpmProperty 'init.author.name' ($userInfo.DisplayName)
 Set-NpmProperty 'init.author.email' ($userInfo.EmailAddress)
 
@@ -123,11 +131,14 @@ Set-NpmProperty 'init.author.email' ($userInfo.EmailAddress)
 ## what is remaining on the screen.
 Start-Sleep -s 5
 
-Write-Host @"
+Write-Host "`n`nDone!`n"
 
+if ($global:EnvironmentRefreshRequired -eq $true)
+{
+    Write-Host @"
 
-Done! Several user environment variables were changed and/or added; in order
-for those changes and the new commands they make available to be reflected in
+Several user environment variables were changed and/or added; in order for
+those changes and the new commands they make available to be reflected in
 your environment, you must either restart Windows Explorer or log out and log
 back in.
 
@@ -143,5 +154,7 @@ use its 'File'->'New Task (Run...)' menu command to start the 'explorer.exe'
 program. When 'explorer.exe' is restarted, your taskbar will return along with
 your system notification area and any programs that you had running.
 
-Enjoy!
 "@
+}
+
+Write-Host "Share and Enjoy!"

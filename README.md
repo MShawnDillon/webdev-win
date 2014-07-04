@@ -59,6 +59,8 @@ The batch file launches the `get-to-work.ps1` PowerShell script.
 
 The PowerShell script then pulls in all of the other scripts it needs to work.
 
+#### Who Are You?
+
 It then sets about trying to automatically determine who you are (reading from
 environment variables, mostly), but specifically it needs to know your display
 name (at least, the display name as it is stored either in Active Directory or
@@ -67,6 +69,8 @@ information automatically, it may ask you for it.
 
 These two pieces of information (display name and e-mail address) are needed
 to correctly configure Git and other tools.
+
+#### Git? Git.
 
 Next, it finds out whether you have Git already, and if not, it gets a
 portable version that can be used without installation (for example, you could
@@ -82,6 +86,8 @@ context menu items are not likely to cause a lot of pain and suffering.
 By default, the `get-to-work.ps1` script puts Git into your `%APPDATA%`
 directory, so as to keep it out of your way, but still make it available to
 your own user account.
+
+#### Configure Git
 
 When the script is sure that Git is available, it then sets the 'user.name',
 'user.email', 'push.default', 'alias.serve', and 'alias.hub' Git global
@@ -125,6 +131,51 @@ repository, but also to push their own changes to you. This is distributed
 version control at its finest; notice that no centralized server needs to be
 involved (though you will likely want to use one when you share changes with
 your company-at-large).
+
+#### NVMW? NVMW.
+
+After Git has been determined to exist and be configured correctly for use,
+the script then checks for the existence of the Node Version Manager for
+Windows. NVMW, like [NVM], allows you to use, run, and test with multiple
+versions of Node on the same machine, with the side benefit that each version
+is a self-contained, isolated resource that does not require any changes to
+system-wide resources or settings. The only downside to using Node in this way
+is that you do not have access to the performance counters and event tracing
+providers that would otherwise be installed for system-wide monitoring of Node
+applications.
+
+If Node Version Manager for Windows is not available, then its repository is
+cloned from a customized (forked) version of the original using Git. This is
+accomplished with the command
+`git clone https://github.com/MShawnDillon/nvmw.git`, and it is also placed
+in the user's %APPDATA% directory (for the same reason that Git was placed
+there, to keep it available, but out of the way).
+
+#### Node? Node.
+
+Node itself is a single, standalone executable, that embeds within it the
+Google V8 JavaScript engine and a set of JavaScript modules that are made
+available to any node process. There is, of course, much more to Node than
+just JavaScript, such as the internal asynchronous network and file system
+I/O bindings that have given rise to Node's popularity as a real-time,
+super-scalable network, data, and web application development platform.
+
+After making sure that [NVMW][NVMW] or my own modified version of
+[NVMW][NVMWFork] is available, the script then determines whether
+[Node][NodeJS] itself already exists on the system, along with the [Node
+Package Manager][NPM].
+
+If either or both of these are not available for immediate use, then the
+script uses [NVMW][NVMWFork] to download the [Node][NodeJS] executable and
+the version of [NPM][NPM] that it is typically packaged with (when used as
+a system-wide install).
+
+These are placed within the [NVMW] directory, in subdirectories named after
+the version of the Node executable they contain, and a 'directory junction'
+(symbolic link) named 'Current' is created to point to the current version
+in use.
+
+-----------------------------------
 
 **&lt;rant&gt;**
 
@@ -213,6 +264,7 @@ no special privileges whatsoever.
 [NonAdmin_Git]: http://davidpp.com/git-on-windows-with-no-admin-rights-in-3-steps/ "Git on Windows with no admin rights in 3 steps."
 [NVM]: https://github.com/creationix/nvm "Node Version Manager"
 [NVMW]: https://github.com/hakobera/nvmw "Node Version Manager for Windows"
+[NVMWFork]: https://github.com/MShawnDillon/nvmw "Node Version Manager for Windows"
 [NodeJS]: http://nodejs.org/ "NodeJS"
 [NPM]: https://www.npmjs.org/ "Node Packaged Modules"
 [NuGet]: https://www.nuget.org/ "NuGet Gallery"
