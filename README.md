@@ -190,14 +190,16 @@ library. This makes globally installed packages ideal for things like
 command-line tools that should be available *to your own user account* from
 any command prompt or terminal window.
 
-Also note that *installing* a package refers to the act of downloading it to
-a location on your own machine. Using this definition, you are technically
-'installing' the HTML, stylesheets, images, scripts, and other resources from
-every web page you happen to visit. Most package managers, including
-Microsoft's [NuGet][NuGet] package manager and the [Node Package Manager][NPM]
-use this definition when they refer to installing a package; rather than the
-older, more traditional definition that typically involved making system-wide
-changes to your machine.
+Also note that *installing* a package generally refers to the act of
+downloading it to a location on your own machine. Using this definition, you
+are technically 'installing' all of the HTML, stylesheets, images, scripts,
+and other resources from every web page you happen to visit. (Try getting all
+of that to go through your software certification department.) Most package
+managers, including Microsoft's [NuGet][NuGet] package manager and the
+[Node Package Manager][NPM], use this definition when they refer to installing
+a package; rather than the older, more traditional definition of 'software
+installation' that typically involved making system-wide changes to your
+machine.
 
 In any case, I wanted to create a script that would basically 'start from
 scratch', assuming only a locked-down out-of-the-box installation of Windows
