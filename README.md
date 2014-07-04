@@ -93,9 +93,9 @@ but they can also be overridden within any given repository.
 
 The purpose of the 'user.name' and 'user.email' settings should be pretty
 obvious. When you commit changes, this is "who" those changes in the
-repository will be associated with by default. Notice that you can impersonate
-someone else if you really wanted to, simply by providing a false name and
-email address for these settings. If you're wondering whether or not this
+repository will be associated with. Notice that you can impersonate someone
+else if you really wanted to, simply by providing a false name and email
+address for these settings. If you're wondering whether or not this
 constitutes a security issue, the short answer is "no". Any name and e-mail
 address can be tacked onto a set of changes on your own copy of the repo.
 It is the process of authenticating yourself when you go pushing those changes
