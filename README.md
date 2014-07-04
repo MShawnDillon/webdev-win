@@ -116,7 +116,7 @@ question][GitServe], I missed Mercurial's simple built-in web server for quick
 collaboration directly between peers in a LAN environment. These aliases allow
 you to quickly (and temporarily) host any repository on your own box and share
 it directly with other people on your network. Within the root of any given
-repository, typing `git serve` will host that repository for other user's to
+repository, typing `git serve` will host that repository for other users to
 pull from (the pulling user would use something like
 `git clone git://*machinename*/` to clone the repository directly from your
 `machinename`). Similarly, `git hub` (note the space...this is the command,
