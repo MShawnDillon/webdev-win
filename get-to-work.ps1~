@@ -82,8 +82,7 @@ if ((Test-Nvmw) -eq $false)
 
 if (((Get-NodeVersion) -eq $null) -or ((Get-NpmVersion) -eq $null))
 {
-    Invoke-BatchFile -Path ((Get-Command nvmw.bat).Path) -Arguments 'install v0.10.29'
-    Invoke-BatchFile -Path ((Get-Command nvmw.bat).Path) -Arguments 'use v0.10.29'
+    Invoke-BatchFile -Path ((Get-Command nvmw.bat).Path) -Arguments "install v0.10.29"
 }
 
 ## *Name Withdrawn* engages in the dubious practice of "SSL
