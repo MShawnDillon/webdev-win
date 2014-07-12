@@ -127,9 +127,17 @@ Set-NpmProperty 'cafile' $gitCaSetting -Global -Force
 Set-NpmProperty 'init.author.name' ($userInfo.DisplayName)
 Set-NpmProperty 'init.author.email' ($userInfo.EmailAddress)
 
+Get-Process | Where-Object { $_.ProcessName -eq 'explorer' } | Stop-Process
+
 ## Pause for 5 seconds so the user can take in what all just happened and read
 ## what is remaining on the screen.
 Start-Sleep -s 5
+
+$explorerProcess = Get-Process | Where-Object { $_.ProcessName -eq 'explorer' }
+
+if (($explorerProcess -eq $null) -or ($explorerProcess.Length -eq 0)) {
+    Start-Process 'explorer' -UseNewEnvironment
+}
 
 Write-Host "`n`nDone!`n"
 
